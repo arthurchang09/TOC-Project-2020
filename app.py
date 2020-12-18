@@ -17,7 +17,7 @@ machine = TocMachine(
     states=["user","state1", "state2"],
     transitions=[
         {
-            "trigger": "advacne",
+            "trigger": "advance",
             "source": "user",
             "dest": "state1",
             "conditions": "is_going_to_state1",
