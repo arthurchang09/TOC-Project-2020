@@ -40,6 +40,12 @@ machine = TocMachine(
     show_conditions=True,
 )
 
+def handleTrigger(state,event):
+    if state=='user':
+        machine.advance(event)
+    if state=='option':
+        machine.choose(event)
+
 app = Flask(__name__, static_url_path="")
 
 
