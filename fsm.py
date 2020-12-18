@@ -7,9 +7,9 @@ class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
-    def is_going_to_state1(self, event):
+    def is_going_to_music(self, event):
         text = event.message.text
-        return text.lower() == "go to state1"
+        return text.lower() == "我想聽音樂"
 
     def is_going_to_state2(self, event):
         text = event.message.text
@@ -21,17 +21,17 @@ class TocMachine(GraphMachine):
         print("I'm entering state1")
         option_str=(
             "two\n"+
-            "go to state1\n"+
+            "我想聽音樂\n"+
             "go to state2\n"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
 
-    def on_enter_state1(self, event):
+    def on_enter_music(self, event):
         print("I'm entering state1")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state1")
+        send_text_message(reply_token, "Trigger music")
         #self.go_back()
 
    # def on_exit_state1(self):
