@@ -14,13 +14,14 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user","option","music","play", "state2"],
+    states=["user","option","music","random","play", "state2"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
             "dest": "option",  
         },
+        #music
         {
             "trigger": "advance",
             "source": "option",
@@ -33,6 +34,7 @@ machine = TocMachine(
             "dest": "option",
             "conditions":"is_going_back",
         },
+        #play music
         {
             "trigger": "advance",
             "source": "music",
@@ -42,15 +44,37 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "play",
-            "dest": "option",
-            "conditions":"is_going_back",
+            "dest": "music",
+            "conditions":"is_going_to_music",
         },
         {
             "trigger": "advance",
             "source": "play",
+            "dest": "option",
+            "conditions":"is_going_back",
+        },
+        #------
+        #random play music
+        {
+            "trigger": "advance",
+            "source": "music",
+            "dest": "random",
+            "conditions": "is_going_to_random",
+        },
+        {
+            "trigger": "advance",
+            "source": "random",
             "dest": "music",
             "conditions":"is_going_to_music",
         },
+        {
+            "trigger": "advance",
+            "source": "random",
+            "dest": "option",
+            "conditions":"is_going_back",
+        },
+        #--------
+        
         {
             "trigger": "advance",
             "source": "option",
