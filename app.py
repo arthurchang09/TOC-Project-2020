@@ -30,6 +30,12 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "music",
+            "dest": "option",
+            "conditions":"is_going_back",
+        },
+        {
+            "trigger": "advance",
+            "source": "music",
             "dest": "play",
             "conditions": "is_going_to_play",
         },
@@ -51,13 +57,8 @@ machine = TocMachine(
             "dest": "option",
             "conditions":"is_going_back",
         },
-        {
-            "trigger": "advance",
-            "source": "music",
-            "dest": "option",
-            "conditions":"is_going_back",
-        },
-        #{"trigger": "go_back", "source": ["state1", "state2"], "dest": "option"},
+        
+
     ],
     initial="user",
     auto_transitions=False,

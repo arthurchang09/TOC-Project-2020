@@ -31,19 +31,37 @@ class TocMachine(GraphMachine):
 
     def on_enter_music(self, event):
         print("I'm entering music")
+        music_list=(
+            "曲單:\n"+
+            "1.op48 no 1 by Chopin\n"+
+            "2.Symphony no.6 by Tchaikovsky\n"+
+            "3.BWV565 by Bach\n"+
+            "4.Chaconne by Bach\n"+
+            "5.Le Temps des cathedrales\n"+
+            "6.Violin Concerto in D major by Tchaikovsky\n"
+            "選歌 請輸入 編號\n"
+        )
         reply_token = event.reply_token
-        send_text_message(reply_token, "請輸入 0~20 ")
+        send_text_message(reply_token, music_list)
         #self.go_back()
     def on_enter_play(self, event):
         print("I'm entering paly")
         text = event.message.text
         music_str=("wrong\n")
         if int(text)==1:
-             music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU\n")
+             music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU")
         elif int(text)==2:
-             music_str=("1\n")
+             music_str=("https://www.youtube.com/watch?v=zIJiPlbJjs8")
+        elif int(text)==3:
+             music_str=("https://www.youtube.com/watch?v=Nnuq9PXbywA")
+        elif int(text)==4:
+             music_str=("https://www.youtube.com/watch?v=ngjEVKxQCWs")
+        elif int(text)==5:
+             music_str=("https://www.youtube.com/watch?v=qT6Mpkj9Y8Q")
+        elif int(text)==6:
+             music_str=("https://www.youtube.com/watch?v=CTE08SS8fNk")
         reply_token = event.reply_token
-        send_text_message(reply_token, music_str)
+        send_text_message(reply_token, music_str+"\n輸入menu回到菜單")
         
     def on_enter_state2(self, event):
         print("I'm entering state2")
