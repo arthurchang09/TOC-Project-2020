@@ -32,15 +32,15 @@ class TocMachine(GraphMachine):
     def on_enter_music(self, event):
         print("I'm entering music")
         reply_token = event.reply_token
-        send_text_message(reply_token, "請輸入0~20")
+        send_text_message(reply_token, "請輸入 0~20 ")
         #self.go_back()
     def on_enter_play(self, event):
         print("I'm entering paly")
         text = event.message.text
         music_str=("wrong\n")
-        if text==1:
+        if int(text)==1:
              music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU\n")
-        elif text==2:
+        elif int(text)==2:
              music_str=("1\n")
         reply_token = event.reply_token
         send_text_message(reply_token, music_str)
