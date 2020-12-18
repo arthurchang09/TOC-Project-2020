@@ -28,10 +28,14 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, option_str)
 
     def on_enter_music(self, event):
-        print("I'm entering state1")
-
+        print("I'm entering music")
+        music_list=(
+            "music list\n"+
+            "https://www.youtube.com/watch?v=-7mntyrW3HU"+
+            "\n2."
+        )
         reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger music")
+        send_text_message(reply_token, music_list)
         #self.go_back()
 
    # def on_exit_state1(self):
