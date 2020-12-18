@@ -44,6 +44,7 @@ class TocMachine(GraphMachine):
             "5.Le Temps des cathedrales\n"+
             "6.Violin Concerto in D major by Tchaikovsky\n"
             "選歌 請輸入 編號\n"+
+            "隨機播放 請輸入 隨機\n"+
             "輸入menu回到主選單"
         )
         reply_token = event.reply_token
