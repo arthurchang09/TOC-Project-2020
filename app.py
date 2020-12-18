@@ -22,13 +22,13 @@ machine = TocMachine(
             "dest": "option",
         },
         {
-            "trigger": "choose",
+            "trigger": "advacne",
             "source": "option",
             "dest": "state1",
             "conditions": "is_going_to_state1",
         },
         {
-            "trigger": "choose",
+            "trigger": "advance",
             "source": "option",
             "dest": "state2",
             "conditions": "is_going_to_state2",
@@ -40,11 +40,6 @@ machine = TocMachine(
     show_conditions=True,
 )
 
-def handleTrigger(state,event):
-    if state=='user':
-        machine.advance(event)
-    if state=='option':
-        machine.choose(event)
 
 app = Flask(__name__, static_url_path="")
 
