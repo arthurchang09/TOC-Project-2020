@@ -47,6 +47,12 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
+            "source": "play",
+            "dest": "music",
+            "conditions":"is_going_to_music",
+        },
+        {
+            "trigger": "advance",
             "source": "option",
             "dest": "state2",
             "conditions": "is_going_to_state2",

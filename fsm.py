@@ -61,7 +61,7 @@ class TocMachine(GraphMachine):
         elif int(text)==6:
              music_str=("https://www.youtube.com/watch?v=CTE08SS8fNk")
         reply_token = event.reply_token
-        send_text_message(reply_token, music_str+"\n輸入menu回到菜單")
+        send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入 我想聽音樂 回到音樂選單")
         
     def on_enter_state2(self, event):
         print("I'm entering state2")
