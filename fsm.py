@@ -14,6 +14,9 @@ class TocMachine(GraphMachine):
     def is_going_to_state2(self, event):
         text = event.message.text
         return text.lower() == "go to state2"
+    def is_going_back(self, event):
+        text = event.message.text
+        return text.lower() == "menu"
     def on_enter_option(self, event):
         print("I'm entering state1")
         option_str=(
@@ -40,6 +43,6 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
         #self.go_back()
-
+    
     #def on_exit_state2(self):
      #   print("Leaving state2")

@@ -37,11 +37,13 @@ machine = TocMachine(
             "trigger": "advance",
             "source": "state2",
             "dest": "option",
+            "conditions":"is_going_back",
         },
         {
             "trigger": "advance",
             "source": "state1",
             "dest": "option",
+            "conditions":"is_going_back",
         },
         #{"trigger": "go_back", "source": ["state1", "state2"], "dest": "option"},
     ],
