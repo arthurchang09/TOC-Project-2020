@@ -15,13 +15,15 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "go to state2"
     def on_enter_option(self, event):
-        options_str=(
-            "Funtions:\n"+
-            "type go to state1\n"
-            "type go to state2\n"
-        )
+        print("I'm entering option")
+        option_str=(
+            "two fun\n"+
+            "go to state1\n"+
+            "go to state2\n"
+            )
         reply_token = event.reply_token
-        send_text_message(reply_token, options_str)
+        send_text_message(reply_token, option_str())
+        
 
     def on_enter_state1(self, event):
         print("I'm entering state1")
