@@ -22,7 +22,7 @@ class TocMachine(GraphMachine):
             "go to state2\n"
             )
         reply_token = event.reply_token
-        send_text_message(reply_token, option_str())
+        send_text_message(reply_token, option_str)
         
 
     def on_enter_state1(self, event):
