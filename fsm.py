@@ -77,10 +77,10 @@ class TocMachine(GraphMachine):
         print("I'm entering state1")
         option_str=(
             "請輸入以下關鍵字取得功能\n"+
-            "我想聽音樂\n"+
-            "guess number\n"+
-            "猜謎\n"+
-            "笑話"
+            "1.我想聽音樂：來聽點音樂\n"+
+            "2.guess number：猜數字遊戲\n"+
+            "3.猜謎：來猜點謎語吧\n"+
+            "4.笑話：看笑話放鬆一下(很冷警告)"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
@@ -97,8 +97,8 @@ class TocMachine(GraphMachine):
             "6.Violin Concerto in D major by Tchaikovsky\n"+
             "7.op 55 no.1 by Chopin \n"+
             "8.Der Erlkönig violin version\n"
-            "選歌 請輸入 編號\n"+
-            "隨機播放 請輸入 隨機\n"+
+            "選歌請輸入歌曲編號\n"+
+            "隨機播放 請輸入「隨機」\n"+
             "輸入menu回到主選單"
         )
         reply_token = event.reply_token
@@ -205,7 +205,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答案是 「"+self.ans+"」想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
+        send_text_message(reply_token, "答案是 「"+self.ans+"」，想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
     def on_enter_laugh(self, event):
         reply_token = event.reply_token
         get_rand=random.randint(0,len(laughing.laugh)-1)
