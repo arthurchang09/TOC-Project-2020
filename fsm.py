@@ -25,22 +25,22 @@ class TocMachine(GraphMachine):
         return text.lower() == "guess number"
     def is_going_to_right(self, event):
         text = event.message.text
-        return int(text)==self.num
+        return int(text)==self.num & text.lower()!="menu"
     def is_going_to_wrong_large(self, event):
         text = event.message.text
-        return int(text)>self.num
+        return int(text)>self.num & text.lower()!="menu"
     def is_going_to_wrong_small(self, event):
         text = event.message.text
-        return int(text)<self.num
+        return int(text)<self.num & text.lower()!="menu"
     def is_going_to_riddle(self, event):
         text = event.message.text
         return text.lower() == "猜謎"
     def is_going_to_riddle_right(self, event):
         text = event.message.text
-        return text.lower() == self.ans
+        return text.lower() == self.ans & text.lower()!="menu"
     def is_going_to_riddle_wrong(self, event):
         text = event.message.text
-        return text.lower() != self.ans
+        return text.lower() != self.ans & text.lower()!="menu"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -154,6 +154,9 @@ class TocMachine(GraphMachine):
         elif self.riddle_num==4:
             riddle_str=("一邊發綠,一邊發紅;一邊喜雨,一邊怕風;一邊怕水,一邊怕蟲 (猜一字)")
             self.ans=("秋")
+        elif self.riddle_num==4:
+            riddle_str=("悟道乘舟去，張弓射遠空 (猜二字)")
+            self.ans=("首長")
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
