@@ -7,6 +7,7 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
+from transitions.extensions import GraphMachine
 from fsm import TocMachine
 from utils import send_text_message
 

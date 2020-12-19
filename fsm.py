@@ -42,7 +42,8 @@ class TocMachine(GraphMachine):
             "3.BWV565 by Bach\n"+
             "4.Chaconne by Bach\n"+
             "5.Le Temps des cathedrales\n"+
-            "6.Violin Concerto in D major by Tchaikovsky\n"
+            "6.Violin Concerto in D major by Tchaikovsky\n"+
+            "7.op 55 no.1 by Chopin \n"
             "選歌 請輸入 編號\n"+
             "隨機播放 請輸入 隨機\n"+
             "輸入menu回到主選單"
@@ -85,6 +86,8 @@ class TocMachine(GraphMachine):
              music_str=("https://www.youtube.com/watch?v=qT6Mpkj9Y8Q")
         elif num==6:
              music_str=("https://www.youtube.com/watch?v=CTE08SS8fNk")
+        elif num==7:
+             music_str=("https://www.youtube.com/watch?v=e3yrEEM5j_s")
         reply_token = event.reply_token
         send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入 我想聽音樂 回到音樂選單")
     def on_enter_state2(self, event):
