@@ -24,9 +24,12 @@ class TocMachine(GraphMachine):
     def is_going_to_right(self, event):
         text = event.message.text
         return int(text)==self.num
-    def is_going_to_wrong(self, event):
+    def is_going_to_wrong_large(self, event):
         text = event.message.text
-        return int(text)!=self.num
+        return int(text)>self.num
+    def is_going_to_wrong_small(self, event):
+        text = event.message.text
+        return int(text)<self.num
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -114,9 +117,13 @@ class TocMachine(GraphMachine):
         print("I'm entering right")
         reply_token = event.reply_token
         send_text_message(reply_token, "You are right! 輸入Menu回到主選單")
-    def on_enter_wrong(self, event):
-        print("I'm entering wrong")
+    def on_enter_wrong_large(self, event):
+        print("I'm entering wrong_large")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are wrong! 在猜一次")
+        send_text_message(reply_token, "You are wrong! 太大了，再猜一次")
+    def on_enter_wrong_small(self, event):
+        print("I'm entering wrong_large")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "You are wrong! 太小了，再猜一次")
     #def on_exit_state2(self):
      #   print("Leaving state2")

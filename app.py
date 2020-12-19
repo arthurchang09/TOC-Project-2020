@@ -15,7 +15,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user","option","music","random","play", "guest_num","right","wrong"],
+    states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small"],
     transitions=[
         {
             "trigger": "advance",
@@ -97,22 +97,51 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": "guest_num",
-            "dest": "wrong",
-            "conditions": "is_going_to_wrong",
+            "dest": "wrong_large",
+            "conditions": "is_going_to_wrong_large",
         },
         {
             "trigger": "advance",
-            "source": "wrong",
+            "source": "guest_num",
+            "dest": "wrong_small",
+            "conditions": "is_going_to_wrong_small",
+        },
+        {
+            "trigger": "advance",
+            "source": "wrong_large",
             "dest": "right",
             "conditions": "is_going_to_right",
         },
         {
             "trigger": "advance",
-            "source": "wrong",
-            "dest": "wrong",
-            "conditions": "is_going_to_wrong",
+            "source": "wrong_small",
+            "dest": "right",
+            "conditions": "is_going_to_right",
         },
-        
+        {
+            "trigger": "advance",
+            "source": "wrong_large",
+            "dest": "wrong_large",
+            "conditions": "is_going_to_wrong_large",
+        },
+        {
+            "trigger": "advance",
+            "source": "wrong_large",
+            "dest": "wrong_small",
+            "conditions": "is_going_to_wrong_small",
+        },
+        {
+            "trigger": "advance",
+            "source": "wrong_small",
+            "dest": "wrong_large",
+            "conditions": "is_going_to_wrong_large",
+        },
+        {
+            "trigger": "advance",
+            "source": "wrong_small",
+            "dest": "wrong_small",
+            "conditions": "is_going_to_wrong_small",
+        },
         
         {
             "trigger": "advance",
