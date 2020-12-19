@@ -143,7 +143,7 @@ class TocMachine(GraphMachine):
         print("I'm entering guest_num")
         self.num=random.randint(0, 10)
         reply_token = event.reply_token
-        send_text_message(reply_token, "guess number,Enter a integer.")
+        send_text_message(reply_token, "Guess number. Enter a integer.")
         #self.go_back()
     def on_enter_right(self, event):
         print("I'm entering right")
@@ -152,15 +152,15 @@ class TocMachine(GraphMachine):
     def on_enter_wrong_large(self, event):
         print("I'm entering wrong_large")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are wrong! 太大了，再猜一次 退出輸入Menu回到主選單")
+        send_text_message(reply_token, "You are wrong! 太大了，再猜一次。退出輸入Menu回到主選單")
     def on_enter_wrong_small(self, event):
         print("I'm entering wrong_large")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are wrong! 太小了，再猜一次 退出輸入Menu回到主選單")
+        send_text_message(reply_token, "You are wrong! 太小了，再猜一次。退出輸入Menu回到主選單")
     def on_enter_riddle(self, event):
         print("I'm entering riddle")
         riddle_str=("")
-        self.riddle_num=random.randint(1, 4)
+        self.riddle_num=random.randint(1, 7)
         reply_token = event.reply_token
         if self.riddle_num==1:
             riddle_str=("芷草飛花落，重峰望北塵 (猜一字)")
@@ -174,9 +174,18 @@ class TocMachine(GraphMachine):
         elif self.riddle_num==4:
             riddle_str=("一邊發綠,一邊發紅;一邊喜雨,一邊怕風;一邊怕水,一邊怕蟲 (猜一字)")
             self.ans=("秋")
-        elif self.riddle_num==4:
+        elif self.riddle_num==5:
             riddle_str=("悟道乘舟去，張弓射遠空 (猜二字)")
             self.ans=("首長")
+        elif self.riddle_num==6:
+            riddle_str=("迅舟西向馳，妙語傳佳信 (猜一字)")
+            self.ans=("訊")
+        elif self.riddle_num==7:
+            riddle_str=("此花自古無栽,一夜北風遍地開,近看無枝又無葉,不知何處長出來 (猜天氣現象，一字)")
+            self.ans=("雪")
+        elif self.riddle_num==8:
+            riddle_str=("需要一半,留下一半 (猜一字)")
+            self.ans=("雷")
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
