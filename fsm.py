@@ -140,7 +140,7 @@ class TocMachine(GraphMachine):
     def on_enter_riddle(self, event):
         print("I'm entering riddle")
         riddle_str=("")
-        self.riddle_num=random.randint(1, 2)
+        self.riddle_num=random.randint(1, 4)
         reply_token = event.reply_token
         if self.riddle_num==1:
             riddle_str=("芷草飛花落，重峰望北塵 (猜一字)")
@@ -148,12 +148,18 @@ class TocMachine(GraphMachine):
         elif self.riddle_num==2:
             riddle_str=("紅芍半掩向西南 (猜一字)")
             self.ans=("約")
+        elif self.riddle_num==3:
+            riddle_str=("上八不像八,下八才是八,十字當中站,生命需靠它 (猜一字)")
+            self.ans=("米")
+        elif self.riddle_num==4:
+            riddle_str=("一邊發綠,一邊發紅;一邊喜雨,一邊怕風;一邊怕水,一邊怕蟲 (猜一字)")
+            self.ans=("秋")
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答對了 輸入Menu回到主選單")
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答錯了 輸入Menu回到主選單 輸入答案再猜一次")
+        send_text_message(reply_token, "答錯了 輸入Menu回到主選單 ")
     #def on_exit_state2(self):
      #   print("Leaving state2")
