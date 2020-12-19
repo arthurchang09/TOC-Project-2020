@@ -43,6 +43,8 @@ class TocMachine(GraphMachine):
         return text.lower() == "猜謎"
     def is_going_to_riddle_right(self, event):
         text = event.message.text
+        if text=="menu":
+            return False
         return text.lower() == self.ans 
     def is_going_to_riddle_wrong(self, event):
         text = event.message.text
