@@ -15,7 +15,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small"],
+    states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong"],
     transitions=[
         {
             "trigger": "advance",
@@ -28,12 +28,6 @@ machine = TocMachine(
             "source": "option",
             "dest": "music",
             "conditions": "is_going_to_music",
-        },
-        {
-            "trigger": "advance",
-            "source": "music",
-            "dest": "option",
-            "conditions":"is_going_back",
         },
         #play music
         {
@@ -68,12 +62,6 @@ machine = TocMachine(
             "dest": "music",
             "conditions":"is_going_to_music",
         },
-        {
-            "trigger": "advance",
-            "source": "random",
-            "dest": "option",
-            "conditions":"is_going_back",
-        },
         #--------
         #guess number
         {
@@ -90,12 +78,6 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "right",
-            "dest": "option",
-            "conditions":"is_going_back",
-        },
-        {
-            "trigger": "advance",
             "source": "guest_num",
             "dest": "wrong_large",
             "conditions": "is_going_to_wrong_large",
@@ -141,16 +123,47 @@ machine = TocMachine(
             "source": "wrong_small",
             "dest": "wrong_small",
             "conditions": "is_going_to_wrong_small",
-        },
+        },        
         
+        #-------
+        #猜謎
         {
             "trigger": "advance",
-            "source": "guest_num",
-            "dest": "option",
-            "conditions":"is_going_back",
+            "source": "option",
+            "dest": "riddle",
+            "conditions": "is_going_to_riddle",
         },
-        
-
+        {
+            "trigger": "advance",
+            "source": "riddle",
+            "dest": "riddle_right",
+            "conditions": "is_going_to_riddle_right",
+        },
+        {
+            "trigger": "advance",
+            "source": "riddle",
+            "dest": "riddle_wrong",
+            "conditions": "is_going_to_riddle_wrong",
+        },
+        {
+            "trigger": "advance",
+            "source": "riddle_wrong",
+            "dest": "riddle_wrong",
+            "conditions": "is_going_to_riddle_wrong",
+        },
+        {
+            "trigger": "advance",
+            "source": "riddle_wrong",
+            "dest": "riddle_right",
+            "conditions": "is_going_to_riddle_right",
+        },
+        #---------
+        #---------
+        {"trigger": "advance", 
+         "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong"], 
+         "dest": "option",
+         "conditions":"is_going_back"
+        },
     ],
     initial="user",
     auto_transitions=False,

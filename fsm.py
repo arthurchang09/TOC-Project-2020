@@ -7,6 +7,8 @@ import random
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.num=0
+        self.riddle_num=0
+        self.ans=("hi")
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -30,6 +32,15 @@ class TocMachine(GraphMachine):
     def is_going_to_wrong_small(self, event):
         text = event.message.text
         return int(text)<self.num
+    def is_going_to_riddle(self, event):
+        text = event.message.text
+        return text.lower() == "猜謎"
+    def is_going_to_riddle_right(self, event):
+        text = event.message.text
+        return text.lower() == self.ans
+    def is_going_to_riddle_wrong(self, event):
+        text = event.message.text
+        return text.lower() != self.ans
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -38,7 +49,8 @@ class TocMachine(GraphMachine):
         option_str=(
             "請輸入以下關鍵字取得功能\n"+
             "我想聽音樂\n"+
-            "guess number"
+            "guess number\n"+
+            "猜謎"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
@@ -125,5 +137,23 @@ class TocMachine(GraphMachine):
         print("I'm entering wrong_large")
         reply_token = event.reply_token
         send_text_message(reply_token, "You are wrong! 太小了，再猜一次")
+    def on_enter_riddle(self, event):
+        print("I'm entering riddle")
+        riddle_str=("")
+        self.riddle_num=random.randint(1, 2)
+        reply_token = event.reply_token
+        if self.riddle_num==1:
+            riddle_str=("芷草飛花落，重峰望北塵 (猜一字)")
+            self.ans=("紫")
+        elif self.riddle_num==2:
+            riddle_str=("紅芍半掩向西南 (猜一字)")
+            self.ans=("約")
+        send_text_message(reply_token, riddle_str)
+    def on_enter_riddle_right(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "答對了 輸入Menu回到主選單")
+    def on_enter_riddle_wrong(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "答錯了 輸入Menu回到主選單 輸入答案再猜一次")
     #def on_exit_state2(self):
      #   print("Leaving state2")
