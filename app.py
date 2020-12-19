@@ -72,6 +72,12 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
+            "source": "right",
+            "dest": "guest_num",
+            "conditions": "is_going_to_guest_num",
+        },
+        {
+            "trigger": "advance",
             "source": "guest_num",
             "dest": "wrong_large",
             "conditions": "is_going_to_wrong_large",
@@ -132,6 +138,12 @@ machine = TocMachine(
             "source": "riddle",
             "dest": "riddle_right",
             "conditions": "is_going_to_riddle_right",
+        },
+        {
+            "trigger": "advance",
+            "source": "riddle_right",
+            "dest": "riddle",
+            "conditions": "is_going_to_riddle",
         },
         {
             "trigger": "advance",

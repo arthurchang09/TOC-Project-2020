@@ -148,15 +148,15 @@ class TocMachine(GraphMachine):
     def on_enter_right(self, event):
         print("I'm entering right")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are right! 輸入Menu回到主選單")
+        send_text_message(reply_token, "You are right! 輸入Menu回到主選單 輸入guess number在猜一次")
     def on_enter_wrong_large(self, event):
         print("I'm entering wrong_large")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are wrong! 太大了，再猜一次")
+        send_text_message(reply_token, "You are wrong! 太大了，再猜一次 退出輸入Menu回到主選單")
     def on_enter_wrong_small(self, event):
         print("I'm entering wrong_large")
         reply_token = event.reply_token
-        send_text_message(reply_token, "You are wrong! 太小了，再猜一次")
+        send_text_message(reply_token, "You are wrong! 太小了，再猜一次 退出輸入Menu回到主選單")
     def on_enter_riddle(self, event):
         print("I'm entering riddle")
         riddle_str=("")
@@ -180,7 +180,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答對了 輸入Menu回到主選單")
+        send_text_message(reply_token, "答對了 輸入Menu回到主選單 輸入 猜謎 再猜一次")
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 輸入Menu回到主選單 ")
