@@ -42,12 +42,6 @@ machine = TocMachine(
             "dest": "music",
             "conditions":"is_going_to_music",
         },
-        {
-            "trigger": "advance",
-            "source": "play",
-            "dest": "option",
-            "conditions":"is_going_back",
-        },
         #------
         #random play music
         {
