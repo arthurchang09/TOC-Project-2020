@@ -25,22 +25,22 @@ class TocMachine(GraphMachine):
         return text.lower() == "guess number"
     def is_going_to_right(self, event):
         text = event.message.text
-        return int(text)==self.num & text.lower()!="menu"
+        return int(text)==self.num & str(text).lower()!="menu"
     def is_going_to_wrong_large(self, event):
         text = event.message.text
-        return int(text)>self.num & text.lower()!="menu"
+        return int(text)>self.num & str(text).lower()!="menu"
     def is_going_to_wrong_small(self, event):
         text = event.message.text
-        return int(text)<self.num & text.lower()!="menu"
+        return int(text)<self.num & str(text).lower()!="menu"
     def is_going_to_riddle(self, event):
         text = event.message.text
         return text.lower() == "猜謎"
     def is_going_to_riddle_right(self, event):
         text = event.message.text
-        return text.lower() == self.ans & text.lower()!="menu"
+        return text.lower() == self.ans & str(text).lower()!="menu"
     def is_going_to_riddle_wrong(self, event):
         text = event.message.text
-        return text.lower() != self.ans & text.lower()!="menu"
+        return text.lower() != self.ans & str(text).lower()!="menu"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
