@@ -61,7 +61,12 @@ class TocMachine(GraphMachine):
         text = event.message.text
         if text.lower()=="menu":
             return False
+        elif text.lower()=="拜託給我答案":
+            return False
         return text.lower() != self.ans
+    def is_going_to_riddle_answer(self, event):
+        text = event.message.text
+        return text.lower() == "拜託給我答案"
     def is_going_to_laugh(self,event):
         text = event.message.text
         return text.lower() == "笑話"
@@ -197,7 +202,10 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, "答對了 輸入Menu回到主選單 輸入 猜謎 再猜一次")
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答錯了 輸入Menu回到主選單 ")
+        send_text_message(reply_token, "答錯了 以卑微的語氣輸入 「拜託給我答案」取得答案\n輸入Menu回到主選單 ")
+    def on_enter_riddle_answer(self, event):
+        reply_token = event.reply_token
+        send_text_message(reply_token, "答案是 "+self.ans+" 想不到吧！！！！\n輸入Menu回到主選單 \n輸入 猜謎 再猜另一題")
     def on_enter_laugh(self, event):
         reply_token = event.reply_token
         get_rand=random.randint(0,len(laughing.laugh)-1)

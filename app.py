@@ -250,7 +250,7 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","laugh"],
+                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -395,6 +395,18 @@ def webhook_handler():
                     {
                         "trigger": "advance",
                         "source": "riddle_wrong",
+                        "dest": "riddle_answer",
+                        "conditions": "is_going_to_riddle_answer",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "riddle_answer",
+                        "dest": "riddle",
+                        "conditions": "is_going_to_riddle",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "riddle_wrong",
                         "dest": "riddle_right",
                         "conditions": "is_going_to_riddle_right",
                     },
@@ -413,7 +425,7 @@ def webhook_handler():
                     },
                     #---------
                     {"trigger": "advance", 
-                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","laugh"], 
+                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
