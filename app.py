@@ -15,7 +15,7 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong"],
+    states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","laugh"],
     transitions=[
         {
             "trigger": "advance",
@@ -164,9 +164,21 @@ machine = TocMachine(
             "conditions": "is_going_to_riddle_right",
         },
         #---------
+        {
+            "trigger": "advance",
+            "source": "option",
+            "dest": "laugh",
+            "conditions": "is_going_to_laugh",
+        },
+        {
+            "trigger": "advance",
+            "source": "laugh",
+            "dest": "laugh",
+            "conditions": "is_going_to_laugh",
+        },
         #---------
         {"trigger": "advance", 
-         "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong"], 
+         "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","laugh"], 
          "dest": "option",
          "conditions":"is_going_back"
         },

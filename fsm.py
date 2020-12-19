@@ -3,6 +3,7 @@ from transitions.extensions import GraphMachine
 from utils import send_text_message
 
 import random
+import laughing
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -60,7 +61,10 @@ class TocMachine(GraphMachine):
         text = event.message.text
         if text.lower()=="menu":
             return False
-        return text.lower() != self.ans 
+        return text.lower() != self.ans
+    def is_going_to_laugh(self,event):
+        text = event.message.text
+        return text.lower() == "笑話"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -70,7 +74,8 @@ class TocMachine(GraphMachine):
             "請輸入以下關鍵字取得功能\n"+
             "我想聽音樂\n"+
             "guess number\n"+
-            "猜謎"
+            "猜謎\n"+
+            "笑話"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
@@ -193,5 +198,10 @@ class TocMachine(GraphMachine):
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 輸入Menu回到主選單 ")
+    def on_enter_laugh(self, event):
+        reply_token = event.reply_token
+        get_rand=random.randint(1, 4)
+        laugh_text=laughing.laugh[get_rand]
+        send_text_message(reply_token, laugh_text+"\n輸入Menu回到主選單 輸入 笑話 再看一則笑話")
     #def on_exit_state2(self):
      #   print("Leaving state2")
