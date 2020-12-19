@@ -125,7 +125,7 @@ class TocMachine(GraphMachine):
         elif int(text)==8:
              music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
         reply_token = event.reply_token
-        send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入 我想聽音樂 回到音樂選單")
+        send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
         
     def on_enter_random(self, event):
         print("I'm entering random")
@@ -148,7 +148,7 @@ class TocMachine(GraphMachine):
         elif num==8:
              music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
         reply_token = event.reply_token
-        send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入 我想聽音樂 回到音樂選單")
+        send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
     def on_enter_guest_num(self, event):
         print("I'm entering guest_num")
         self.num=random.randint(0, 10)
@@ -199,17 +199,17 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答對了 \n輸入Menu回到主選單 \n輸入 猜謎 再猜一次")
+        send_text_message(reply_token, "答對了 \n輸入Menu回到主選單 \n輸入「猜謎」再猜一次")
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
-        send_text_message(reply_token, "答案是 「"+self.ans+"」想不到吧！！！！\n輸入Menu回到主選單 \n輸入 猜謎 再猜另一題")
+        send_text_message(reply_token, "答案是 「"+self.ans+"」想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
     def on_enter_laugh(self, event):
         reply_token = event.reply_token
         get_rand=random.randint(0,len(laughing.laugh)-1)
         laugh_text=laughing.laugh[get_rand]
-        send_text_message(reply_token, laugh_text+"\n\n輸入Menu回到主選單 \n輸入 笑話 再看一則笑話")
+        send_text_message(reply_token, laugh_text+"\n\n輸入Menu回到主選單 \n輸入「笑話」再看一則笑話")
     #def on_exit_state2(self):
      #   print("Leaving state2")
