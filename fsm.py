@@ -200,7 +200,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token, "答錯了 輸入Menu回到主選單 ")
     def on_enter_laugh(self, event):
         reply_token = event.reply_token
-        get_rand=random.randint(1, 4)
+        get_rand=random.randint(0, 3)
         laugh_text=laughing.laugh[get_rand]
         send_text_message(reply_token, laugh_text+"\n輸入Menu回到主選單 輸入 笑話 再看一則笑話")
     #def on_exit_state2(self):
