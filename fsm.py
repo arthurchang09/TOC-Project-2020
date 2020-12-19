@@ -35,7 +35,7 @@ class TocMachine(GraphMachine):
         #return int(text)>self.num
         try:
             int(text)
-            return text>self.num
+            return int(text)>self.num
         except ValueError:
             return False
     def is_going_to_wrong_small(self, event):
@@ -45,7 +45,7 @@ class TocMachine(GraphMachine):
         #return int(text)<self.num
         try:
             int(text)
-            return text<self.num
+            return int(text)<self.num
         except ValueError:
             return False
     def is_going_to_riddle(self, event):
