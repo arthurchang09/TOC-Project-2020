@@ -254,7 +254,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         laugh_len=len(laughing.laugh)-1
         send_text_message(reply_token,"輸入數字"+"0~"+str(laugh_len)+"搜尋笑話")
-    def on_enter_search_laugh_num(self, event):
+    def on_enter_laugh_search_num(self, event):
         reply_token = event.reply_token
         text = event.message.text
         print("search_num "+text)
