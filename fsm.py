@@ -83,6 +83,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "search"
     def is_going_to_laugh_search_num(self,event):
+        text = event.message.text
         try:
             int(text)
             return True
@@ -252,11 +253,11 @@ class TocMachine(GraphMachine):
     def on_enter_search_laugh(self, event):
         reply_token = event.reply_token
         laugh_len=len(laughing.laugh)-1
-        send_text_message(reply_token,"輸入數字"+"0~"+laugh_len+"搜尋笑話")
+        send_text_message(reply_token,"輸入數字"+"0~"+str(laugh_len)+"搜尋笑話")
     def on_enter_search_laugh_num(self, event):
         reply_token = event.reply_token
         text = event.message.text
         laugh_content=laughing.laugh[int(text)]
-        send_text_message(reply_token,"你的笑話是編號"+int(text)+":\n"+laugh_content+"\n\n\n輸入menu返回主選單\n輸入search再找一次")
+        send_text_message(reply_token,"你的笑話是編號"+str(text)+":\n"+laugh_content+"\n\n\n輸入menu返回主選單\n輸入search再找一次")
     #def on_exit_state2(self):
      #   print("Leaving state2")
