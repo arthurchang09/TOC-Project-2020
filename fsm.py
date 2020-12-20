@@ -140,24 +140,6 @@ class TocMachine(GraphMachine):
         print("I'm entering paly")
         text = event.message.text
         music_str=("wrong\n")
-        """
-        if int(text)==1:
-             music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU")
-        elif int(text)==2:
-             music_str=("https://www.youtube.com/watch?v=zIJiPlbJjs8")
-        elif int(text)==3:
-             music_str=("https://www.youtube.com/watch?v=Nnuq9PXbywA")
-        elif int(text)==4:
-             music_str=("https://www.youtube.com/watch?v=ngjEVKxQCWs")
-        elif int(text)==5:
-             music_str=("https://www.youtube.com/watch?v=qT6Mpkj9Y8Q")
-        elif int(text)==6:
-             music_str=("https://www.youtube.com/watch?v=CTE08SS8fNk")
-        elif int(text)==7:
-             music_str=("https://www.youtube.com/watch?v=e3yrEEM5j_s")
-        elif int(text)==8:
-             music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
-        """
         music_str=music.music_link[int(text)-1]
         reply_token = event.reply_token
         send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
@@ -166,24 +148,6 @@ class TocMachine(GraphMachine):
         print("I'm entering random")
         num=random.randint(0, len(music.music_link)-1)
         music_str=("wrong\n")
-        """
-        if num==1:
-             music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU")
-        elif num==2:
-             music_str=("https://www.youtube.com/watch?v=zIJiPlbJjs8")
-        elif num==3:
-             music_str=("https://www.youtube.com/watch?v=Nnuq9PXbywA")
-        elif num==4:
-             music_str=("https://www.youtube.com/watch?v=ngjEVKxQCWs")
-        elif num==5:
-             music_str=("https://www.youtube.com/watch?v=qT6Mpkj9Y8Q")
-        elif num==6:
-             music_str=("https://www.youtube.com/watch?v=CTE08SS8fNk")
-        elif num==7:
-             music_str=("https://www.youtube.com/watch?v=e3yrEEM5j_s")
-        elif num==8:
-             music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
-        """
         music_str=music.music_link[num]
         reply_token = event.reply_token
         send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
@@ -221,6 +185,7 @@ class TocMachine(GraphMachine):
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
+        push_message(event.source.user_id, "笑你")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答案是 「"+self.ans+"」，想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
