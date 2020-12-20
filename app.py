@@ -500,7 +500,7 @@ def webhook_handler():
         #print(f"REQUEST BODY: \n{body}")
         response = machine[event.source.user_id].advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            send_text_message(event.reply_token, "輸入錯誤，請檢查並重新輸入")
 
     return "OK"
 

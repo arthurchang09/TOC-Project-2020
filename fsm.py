@@ -4,6 +4,7 @@ from utils import send_text_message
 
 import random
 import laughing
+import riddle
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -208,8 +209,12 @@ class TocMachine(GraphMachine):
     def on_enter_riddle(self, event):
         print("I'm entering riddle")
         riddle_str=("")
-        self.riddle_num=random.randint(1, 7)
+        
+        self.riddle_num=random.randint(0, len(riddle.ques)-1)
+        riddle_str=riddle.ques[self.riddle_num]
+        self.ans=riddle.answer[self.riddle_num]
         reply_token = event.reply_token
+        """
         if self.riddle_num==1:
             riddle_str=("芷草飛花落，重峰望北塵 (猜一字)")
             self.ans=("紫")
@@ -234,6 +239,7 @@ class TocMachine(GraphMachine):
         elif self.riddle_num==8:
             riddle_str=("需要一半,留下一半 (猜一字)")
             self.ans=("雷")
+        """
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
