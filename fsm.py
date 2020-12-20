@@ -97,7 +97,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         try:
             int(text)
-            if int(text)<len(laughing.laugh)-1:
+            if int(text)<len(laughing.laugh):
                 self.delete_num=int(text)
                 return True
             else:
