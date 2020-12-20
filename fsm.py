@@ -18,6 +18,7 @@ class TocMachine(GraphMachine):
         self.new_music_composer=""
         self.new_music_link=""
         self.music_delete_num=""
+        self.modify_num=0
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -145,8 +146,8 @@ class TocMachine(GraphMachine):
         text = event.message.text
         try:
             int(text)
-            if int(text)<len(laughing.laugh):
-                self.music_delete_num=int(text)
+            if int(text)<len(music.music_name):
+                self.music_delete_num=int(text)-1
                 return True
             else:
                 return False
@@ -155,9 +156,54 @@ class TocMachine(GraphMachine):
     def is_going_to_finish_delete_music(self,event):
         text = event.message.text
         return text.lower() == "確認刪除"
+    def is_going_to_modify_music(self,event):
+        text = event.message.text
+        return text.lower() == "修改" 
+    def is_going_to_modify_list(self,event):
+        text = event.message.text
+        try:
+            int(text)
+            if int(text)<len(music.music_name):
+                self.modify_num=int(text)-1
+                self.new_music_name=music.music_name[self.modify_num]
+                self.new_music_link=music.music_link[self.modify_num]
+                self.new_music_composer=music.composer_name[self.modify_num]
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+    def is_going_to_modify_name(self,event):
+        text = event.message.text
+        return text.lower() == "曲名"
+    def is_going_to_modify_name_to_list(self,event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_name=text
+        return text.lower() != "menu"
+    def is_going_to_modify_link(self,event):
+        text = event.message.text
+        return text.lower() == "連結"
+    def is_going_to_modify_link_to_list(self,event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_link=text
+        return text.lower() != "menu"
+    def is_going_to_modify_composer(self,event):
+        text = event.message.text
+        return text.lower() == "作曲家"
+    def is_going_to_modify_composer_to_list(self,event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_composer=text
+        return text.lower() != "menu"
+    def is_going_to_modify_confirm(self,event):
+        text = event.message.text
+        return text.lower() == "確認"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
+    
     def on_enter_option(self, event):
         print("I'm entering state1")
         option_str=(
@@ -331,16 +377,16 @@ class TocMachine(GraphMachine):
     def on_enter_delete_music(self,event):
         reply_token = event.reply_token
         music_len=len(music.music_name)-1
-        send_text_message(reply_token,"輸入數字"+"0~"+str(music_len)+"刪除音樂")
+        send_text_message(reply_token,"輸入數字"+"1~"+str(music_len+1)+"刪除音樂")
     def on_enter_confirm_delete_music(self,event):
         reply_token = event.reply_token
         music_content=(
-            "你要新增的曲目資訊如下："+
+            "你要刪除的曲目資訊如下：\n"+
             "曲名："+music.music_name[self.music_delete_num]+"\n"+
             "連結："+music.music_link[self.music_delete_num]+"\n"+
             "作曲家、演唱家或所屬電影戲劇："+music.composer_name[self.music_delete_num]+"\n"
         )
-        send_text_message(reply_token,"你要刪除的音樂"+":\n"+music_content+"\n\n\n輸入「確認刪除」刪除音樂\n輸入menu返回主選單")
+        send_text_message(reply_token,"你要刪除的音樂"+":\n"+music_content+"輸入「確認刪除」刪除音樂\n輸入menu返回主選單")
     def on_enter_finish_delete_music(self, event):
         reply_token = event.reply_token
         music_content=(
@@ -349,5 +395,36 @@ class TocMachine(GraphMachine):
             music.composer_name.pop(self.music_delete_num)+"\n"
         )
         send_text_message(reply_token,"你刪除了以下的笑話"+":\n"+music_content+"\n\n\n輸入menu返回主選單")
+    def on_enter_modify_music(self, event):
+        reply_token = event.reply_token
+        music_len=len(music.music_name)-1
+        send_text_message(reply_token,"輸入"+"1~"+str(music_len+1)+"選擇要修改的曲子")
+    def on_enter_modify_list(self, event):
+        reply_token = event.reply_token
+        music_content=(
+            "你要修改的曲目資訊如下：\n"+
+            "曲名："+self.new_music_name+"\n"+
+            "連結："+self.new_music_link+"\n"+
+            "作曲家、演唱家或所屬電影戲劇："+self.new_music_composer+"\n"+
+            "輸入「曲名」修改曲名\n"+
+            "輸入「連結」修改連結\n"+
+            "輸入「作曲家」修改作曲家\n"
+        )
+        send_text_message(reply_token,"你要的修改音樂"+":\n"+music_content+"輸入「確認」進行修改\n輸入menu返回主選單")
+    def on_enter_modify_name(self,event):
+        reply_token = event.reply_token
+        send_text_message(reply_token,"請輸入要修改的曲名")
+    def on_enter_modify_link(self,event):
+        reply_token = event.reply_token
+        send_text_message(reply_token,"請輸入要修改的連結")
+    def on_enter_modify_composer(self,event):
+        reply_token = event.reply_token
+        send_text_message(reply_token,"請輸入要修改的作曲家")
+    def on_enter_modify_confirm(self,event):
+        reply_token = event.reply_token
+        music.music_name[self.modify_num]=self.new_music_name
+        music.music_link[self.modify_num]=self.new_music_link
+        music.composer_name[self.modify_num]=self.new_music_composer
+        send_text_message(reply_token,"成功，輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")
