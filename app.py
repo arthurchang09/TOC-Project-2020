@@ -250,7 +250,7 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laught"],
+                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laugh"],
                 transitions=[
                     {
                         "trigger": "advance",
