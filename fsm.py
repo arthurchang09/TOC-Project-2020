@@ -129,26 +129,10 @@ class TocMachine(GraphMachine):
     def on_enter_music(self, event):
         print("I'm entering music")
         music_list=""
-        """
-        music_list=(
-            "曲單:\n"+
-            "1.op48 no 1 by Chopin\n"+
-            "2.Symphony no.6 by Tchaikovsky\n"+
-            "3.BWV565 by Bach\n"+
-            "4.Chaconne by Bach\n"+
-            "5.Le Temps des cathedrales\n"+
-            "6.Violin Concerto in D major by Tchaikovsky\n"+
-            "7.op 55 no.1 by Chopin \n"+
-            "8.Der Erlkönig violin version\n"
-            "選歌請輸入歌曲編號\n"+
-            "隨機播放 請輸入「隨機」\n"+
-            "輸入menu回到主選單"
-        )
-        """
         for i in range(0,len(music.music_name)-1):
             #music_list.append(str(i+1)+music.music_name[i]+"\n")
             #push_message(event.source.user_id,str(i+1)+music.music_name[i]+"\n")
-            music_list+=str(i+1)+music.music_name[i]+"\n"
+            music_list+=str(i+1)+"."+music.music_name[i]+"\n"
         reply_token = event.reply_token
         send_text_message(reply_token, "曲單:\n"+music_list+"選歌請輸入歌曲編號\n"+"隨機播放 請輸入「隨機」\n"+"輸入menu回到主選單")
         #self.go_back()
@@ -156,6 +140,7 @@ class TocMachine(GraphMachine):
         print("I'm entering paly")
         text = event.message.text
         music_str=("wrong\n")
+        """
         if int(text)==1:
              music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU")
         elif int(text)==2:
@@ -172,13 +157,16 @@ class TocMachine(GraphMachine):
              music_str=("https://www.youtube.com/watch?v=e3yrEEM5j_s")
         elif int(text)==8:
              music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
+        """
+        music_str=music.music_link[int(text)-1]
         reply_token = event.reply_token
         send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
         
     def on_enter_random(self, event):
         print("I'm entering random")
-        num=random.randint(1, 8)
+        num=random.randint(1, len(music.music_link))
         music_str=("wrong\n")
+        """
         if num==1:
              music_str=("https://www.youtube.com/watch?v=-7mntyrW3HU")
         elif num==2:
@@ -195,6 +183,8 @@ class TocMachine(GraphMachine):
              music_str=("https://www.youtube.com/watch?v=e3yrEEM5j_s")
         elif num==8:
              music_str=("https://www.youtube.com/watch?v=UWNCbpwC-PQ")
+        """
+        music_str=music.music_link[num]
         reply_token = event.reply_token
         send_text_message(reply_token, music_str+"\n輸入menu回到主選單"+"\n輸入「我想聽音樂」回到音樂選單")
     def on_enter_guest_num(self, event):

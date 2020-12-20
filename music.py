@@ -1,5 +1,5 @@
 music_name=[
-    "op48 no 1 by Chopin\n",
+    "op48 no 1 by Chopin",
     "Symphony no.6 by Tchaikovsky",
     "BWV565 by Bach",
     "Chaconne by Bach",
