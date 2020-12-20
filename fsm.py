@@ -164,7 +164,7 @@ class TocMachine(GraphMachine):
         
     def on_enter_random(self, event):
         print("I'm entering random")
-        num=random.randint(1, len(music.music_link))
+        num=random.randint(0, len(music.music_link)-1)
         music_str=("wrong\n")
         """
         if num==1:
