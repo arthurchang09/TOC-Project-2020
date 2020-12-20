@@ -129,10 +129,10 @@ class TocMachine(GraphMachine):
     def on_enter_music(self, event):
         print("I'm entering music")
         #music_list=""
-        push_message(event.source.user_id,"曲目如下：\n")
-        for i in range(0,len(music.music_name)-1):
+        push_message(event.source.user_id,"曲目如下：")
+        for i in range(0,len(music.music_name)):
             #music_list.append(str(i+1)+music.music_name[i]+"\n")
-            push_message(event.source.user_id,str(i+1)+"."+music.music_name[i]+"\n")
+            push_message(event.source.user_id,str(i+1)+"."+music.music_name[i])
             #music_list+=str(i+1)+"."+music.music_name[i]+"\n"
         reply_token = event.reply_token
         send_text_message(reply_token, "選歌請輸入歌曲編號\n"+"隨機播放 請輸入「隨機」\n"+"輸入menu回到主選單")
