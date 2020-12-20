@@ -128,7 +128,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_music(self, event):
         print("I'm entering music")
-        music_list=()
+        music_list=""
         """
         music_list=(
             "曲單:\n"+

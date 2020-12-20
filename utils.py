@@ -16,6 +16,8 @@ def send_text_message(reply_token, text):
 def push_message(user_id,msg):
     line_bot_api = LineBotApi(channel_access_token)
     line_bot_api.push_message(user_id, TextMessage(text=msg))
+    
+    return "OK"
 
 """
 def send_image_url(id, img_url):
