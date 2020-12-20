@@ -117,7 +117,8 @@ class TocMachine(GraphMachine):
             "1.我想聽音樂：來聽點音樂\n"+
             "2.guess number：猜數字遊戲\n"+
             "3.猜謎：來猜點謎語吧\n"+
-            "4.笑話：看笑話放鬆一下(很冷警告)"
+            "4.笑話：看笑話放鬆一下(很冷警告)\n"+
+            "5.笑話管理：新增、搜尋或刪除笑話"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
