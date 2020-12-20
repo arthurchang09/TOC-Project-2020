@@ -250,7 +250,7 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh"],
+                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laught"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -411,6 +411,7 @@ def webhook_handler():
                         "conditions": "is_going_to_riddle_right",
                     },
                     #---------
+                    #笑話
                     {
                         "trigger": "advance",
                         "source": "option",
@@ -424,8 +425,33 @@ def webhook_handler():
                         "conditions": "is_going_to_laugh",
                     },
                     #---------
+                    {
+                        "trigger": "advance",
+                        "source": "option",
+                        "dest": "laugh_manage",
+                        "conditions": "is_going_to_laugh_manage",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "laugh_manage",
+                        "dest": "add_laugh",
+                        "conditions": "is_going_to_add_laugh",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "add_laugh",
+                        "dest": "add_success",
+                        "conditions": "is_going_to_add_success",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "laugh_manage",
+                        "dest": "list_laugh",
+                        "conditions": "is_going_to_list_laugh",
+                    },
+                    #---------
                     {"trigger": "advance", 
-                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh"], 
+                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laugh"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
