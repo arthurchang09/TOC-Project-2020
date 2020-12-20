@@ -214,32 +214,7 @@ class TocMachine(GraphMachine):
         riddle_str=riddle.ques[self.riddle_num]
         self.ans=riddle.answer[self.riddle_num]
         reply_token = event.reply_token
-        """
-        if self.riddle_num==1:
-            riddle_str=("芷草飛花落，重峰望北塵 (猜一字)")
-            self.ans=("紫")
-        elif self.riddle_num==2:
-            riddle_str=("紅芍半掩向西南 (猜一字)")
-            self.ans=("約")
-        elif self.riddle_num==3:
-            riddle_str=("上八不像八,下八才是八,十字當中站,生命需靠它 (猜一字)")
-            self.ans=("米")
-        elif self.riddle_num==4:
-            riddle_str=("一邊發綠,一邊發紅;一邊喜雨,一邊怕風;一邊怕水,一邊怕蟲 (猜一字)")
-            self.ans=("秋")
-        elif self.riddle_num==5:
-            riddle_str=("悟道乘舟去，張弓射遠空 (猜二字)")
-            self.ans=("首長")
-        elif self.riddle_num==6:
-            riddle_str=("迅舟西向馳，妙語傳佳信 (猜一字)")
-            self.ans=("訊")
-        elif self.riddle_num==7:
-            riddle_str=("此花自古無栽,一夜北風遍地開,近看無枝又無葉,不知何處長出來 (猜天氣現象，一字)")
-            self.ans=("雪")
-        elif self.riddle_num==8:
-            riddle_str=("需要一半,留下一半 (猜一字)")
-            self.ans=("雷")
-        """
+        
         send_text_message(reply_token, riddle_str)
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
