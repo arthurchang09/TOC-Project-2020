@@ -307,7 +307,7 @@ class TocMachine(GraphMachine):
     def on_enter_add_confirm(self, event):
         music.music_name.append(self.new_music_name)
         music.music_link.append(self.new_music_link)
-        music.composer.append(self.new_music_composer)
+        music.composer_name.append(self.new_music_composer)
         reply_token = event.reply_token
         send_text_message(reply_token, "新增成功\n輸入menu返回主選單")
     #def on_exit_state2(self):
