@@ -4,6 +4,7 @@ from utils import send_text_message
 
 import random
 import laughing
+import music
 import riddle
 
 class TocMachine(GraphMachine):
@@ -126,6 +127,8 @@ class TocMachine(GraphMachine):
 
     def on_enter_music(self, event):
         print("I'm entering music")
+        music_list=[]
+        """
         music_list=(
             "曲單:\n"+
             "1.op48 no 1 by Chopin\n"+
@@ -140,8 +143,11 @@ class TocMachine(GraphMachine):
             "隨機播放 請輸入「隨機」\n"+
             "輸入menu回到主選單"
         )
+        """
+        for i in range(0,len(music.music_name)-1):
+            music_list.append(str(i+1)+music.music_name[i]+"\n")
         reply_token = event.reply_token
-        send_text_message(reply_token, music_list)
+        send_text_message(reply_token, "曲單:\n"+music_list+"選歌請輸入歌曲編號\n"+"隨機播放 請輸入「隨機」\n"+"輸入menu回到主選單")
         #self.go_back()
     def on_enter_play(self, event):
         print("I'm entering paly")
