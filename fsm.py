@@ -10,6 +10,7 @@ class TocMachine(GraphMachine):
         self.num=0
         self.riddle_num=0
         self.ans=("hi")
+        self.delete_num=0
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -89,6 +90,23 @@ class TocMachine(GraphMachine):
             return True
         except ValueError:
             return False
+    def is_going_to_delete_laugh(self,event):
+        text = event.message.text
+        return text.lower() == "刪除"
+    def is_going_to_confirm_delete(self,event):
+        text = event.message.text
+        try:
+            int(text)
+            if int(text)<len(laughing.laugh)-1:
+                self.delete_num=int(text)
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+    def is_going_to_finish_delete(self,event):
+        text = event.message.text
+        return text.lower() == "確認刪除"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -257,8 +275,19 @@ class TocMachine(GraphMachine):
     def on_enter_laugh_search_num(self, event):
         reply_token = event.reply_token
         text = event.message.text
-        print("search_num "+text)
         laugh_content=laughing.laugh[int(text)]
         send_text_message(reply_token,"你的笑話"+":\n"+laugh_content+"\n\n\n輸入menu返回主選單\n輸入search再找一次")
+    def on_enter_delete_laugh(self,event):
+        reply_token = event.reply_token
+        laugh_len=len(laughing.laugh)-1
+        send_text_message(reply_token,"輸入數字"+"0~"+str(laugh_len)+"刪除笑話")
+    def on_enter_confirm_delete(self,event):
+        reply_token = event.reply_token
+        laugh_content=laughing.laugh[self.delete_num]
+        send_text_message(reply_token,"你要刪除的笑話"+":\n"+laugh_content+"\n\n\n輸入「確認刪除」刪除笑話\n輸入menu返回主選單")
+    def on_enter_finish_delete(self, event):
+        reply_token = event.reply_token
+        laugh_content=laughing.laugh.pop(self.delete_num)
+        send_text_message(reply_token,"你刪除了以下的笑話"+":\n"+laugh_content+"\n\n\n輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")

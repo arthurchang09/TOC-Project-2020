@@ -250,7 +250,7 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num"],
+                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num","delete_laugh","confirm_delete","finish_delete"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -461,9 +461,27 @@ def webhook_handler():
                         "dest": "search_laugh",
                         "conditions": "is_going_to_search_laugh",
                     },
+                    {
+                        "trigger": "advance",
+                        "source": "laugh_manage",
+                        "dest": "delete_laugh",
+                        "conditions": "is_going_to_delete_laugh",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "delete_laugh",
+                        "dest": "confirm_delete",
+                        "conditions": "is_going_to_confirm_delete",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "confirm_delete",
+                        "dest": "finish_delete",
+                        "conditions": "is_going_to_finish_delete",
+                    },
                     #---------
                     {"trigger": "advance", 
-                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num"], 
+                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num","delete_laugh","confirm_delete","finish_delete"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
