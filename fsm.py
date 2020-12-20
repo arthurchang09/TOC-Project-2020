@@ -212,7 +212,8 @@ class TocMachine(GraphMachine):
             "2.guess number：猜數字遊戲\n"+
             "3.猜謎：來猜點謎語吧\n"+
             "4.笑話：看笑話放鬆一下(很冷警告)\n"+
-            "5.笑話管理：新增、搜尋或刪除笑話"
+            "5.笑話管理：新增、搜尋或刪除笑話"+
+            "6.音樂管理：新增、刪除、修改音樂"
             )
         reply_token = event.reply_token
         send_text_message(reply_token, option_str)
@@ -333,7 +334,7 @@ class TocMachine(GraphMachine):
             "輸入「新增」增加音樂\n"+
             "輸入「刪除」刪除音樂\n"+
             "輸入「修改」修改音樂\n"+
-            "輸入 search 查詢音樂"
+            "輸入 search 查詢音樂(尚未實作，敬請期待)"
         )
         send_text_message(reply_token, manage_list)
     def on_enter_add_music(self, event):
@@ -425,6 +426,6 @@ class TocMachine(GraphMachine):
         music.music_name[self.modify_num]=self.new_music_name
         music.music_link[self.modify_num]=self.new_music_link
         music.composer_name[self.modify_num]=self.new_music_composer
-        send_text_message(reply_token,"成功，輸入menu返回主選單")
+        send_text_message(reply_token,"成功修改，輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")
