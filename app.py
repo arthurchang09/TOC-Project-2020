@@ -488,6 +488,7 @@ def webhook_handler():
                         "conditions": "is_going_to_finish_delete",
                     },
                     #---------
+                    #music manage
                     {
                         "trigger": "advance",
                         "source": "option",
@@ -576,7 +577,7 @@ def webhook_handler():
                     },
                     {
                         "trigger": "advance",
-                        "source": "modify_name",
+                        "source": "modify_link",
                         "dest": "modify_list",
                         "conditions": "is_going_to_modify_link_to_list",
                     },
@@ -588,7 +589,7 @@ def webhook_handler():
                     },
                     {
                         "trigger": "advance",
-                        "source": "modify_name",
+                        "source": "modify_composer",
                         "dest": "modify_list",
                         "conditions": "is_going_to_modify_composer_to_list",
                     },
