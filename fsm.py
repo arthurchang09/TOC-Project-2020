@@ -136,7 +136,7 @@ class TocMachine(GraphMachine):
         return text.lower() != "menu"
     def is_going_to_add_confirm(self, event):
         text = event.message.text
-        return text.lower() != "確認"
+        return text.lower() == "確認"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
