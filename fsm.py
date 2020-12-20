@@ -17,6 +17,7 @@ class TocMachine(GraphMachine):
         self.new_music_name=""
         self.new_music_composer=""
         self.new_music_link=""
+        self.music_delete_num=""
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -137,6 +138,23 @@ class TocMachine(GraphMachine):
     def is_going_to_add_confirm(self, event):
         text = event.message.text
         return text.lower() == "確認"
+    def is_going_to_delete_music(self, event):
+        text = event.message.text
+        return text.lower() == "刪除"
+    def is_going_to_confirm_delete_music(self, event):
+        text = event.message.text
+        try:
+            int(text)
+            if int(text)<len(laughing.laugh):
+                self.music_delete_num=int(text)
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
+    def is_going_to_finish_delete_music(self,event):
+        text = event.message.text
+        return text.lower() == "確認刪除"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -310,5 +328,26 @@ class TocMachine(GraphMachine):
         music.composer_name.append(self.new_music_composer)
         reply_token = event.reply_token
         send_text_message(reply_token, "新增成功\n輸入menu返回主選單")
+    def on_enter_delete_music(self,event):
+        reply_token = event.reply_token
+        music_len=len(music.music_name)-1
+        send_text_message(reply_token,"輸入數字"+"0~"+str(music_len)+"刪除音樂")
+    def on_enter_confirm_delete_music(self,event):
+        reply_token = event.reply_token
+        music_content=(
+            "你要新增的曲目資訊如下："+
+            "曲名："+music.music_name[self.music_delete_num]+"\n"+
+            "連結："+music.music_link[self.music_delete_num]+"\n"+
+            "作曲家、演唱家或所屬電影戲劇："+music.composer_name[self.music_delete_num]+"\n"
+        )
+        send_text_message(reply_token,"你要刪除的音樂"+":\n"+music_content+"\n\n\n輸入「確認刪除」刪除音樂\n輸入menu返回主選單")
+    def on_enter_finish_delete_music(self, event):
+        reply_token = event.reply_token
+        music_content=(
+            music.music_name.pop(self.music_delete_num)+"\n"+
+            music.music_link.pop(self.music_delete_num)+"\n"+
+            music.composer_name.pop(self.music_delete_num)+"\n"
+        )
+        send_text_message(reply_token,"你刪除了以下的笑話"+":\n"+music_content+"\n\n\n輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")

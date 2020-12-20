@@ -255,7 +255,8 @@ def webhook_handler():
                         "riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh",
                         "add_success","search_laugh","laugh_search_num","delete_laugh",
                         "confirm_delete","finish_delete","music_manage","add_music",
-                        "add_music_name","add_music_link","add_music_composer","add_confirm"],
+                        "add_music_name","add_music_link","add_music_composer","add_confirm",
+                        "delete_music","confirm_delete_music","finish_delete_music"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -522,6 +523,24 @@ def webhook_handler():
                         "dest": "add_confirm",
                         "conditions": "is_going_to_add_confirm",
                     },
+                    {
+                        "trigger": "advance",
+                        "source": "music_manage",
+                        "dest": "delete_music",
+                        "conditions": "is_going_to_delete_music",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "delete_music",
+                        "dest": "confirm_delete_music",
+                        "conditions": "is_going_to_confirm_delete_music",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "confirm_delete_music",
+                        "dest": "finish_delete_music",
+                        "conditions": "is_going_to_finish_delete_music",
+                    },
                     #---------
                     {"trigger": "advance", 
                      "source": ["music","random","play", "guest_num","right","wrong_large",
@@ -530,7 +549,8 @@ def webhook_handler():
                                 "add_success","search_laugh","laugh_search_num",
                                 "delete_laugh","confirm_delete","finish_delete",
                                 "music_manage","add_music","add_music_name","add_music_link",
-                                "add_music_composer","add_confirm"], 
+                                "add_music_composer","add_confirm","delete_music","confirm_delete_music",
+                                "finish_delete_music",], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
