@@ -14,6 +14,9 @@ class TocMachine(GraphMachine):
         self.riddle_num=0
         self.ans=("hi")
         self.delete_num=0
+        self.new_music_name=""
+        self.new_music_composer=""
+        self.new_music_link=""
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -110,6 +113,30 @@ class TocMachine(GraphMachine):
     def is_going_to_finish_delete(self,event):
         text = event.message.text
         return text.lower() == "確認刪除"
+    def is_going_to_music_manage(self, event):
+        text = event.message.text
+        return text.lower() == "音樂管理"
+    def is_going_to_add_music(self, event):
+        text = event.message.text
+        return text.lower() == "新增"
+    def is_going_to_add_music_name(self, event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_name=text
+        return text.lower() != "menu"
+    def is_going_to_add_music_link(self, event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_link=text
+        return text.lower() != "menu"
+    def is_going_to_add_music_composer(self, event):
+        text = event.message.text
+        if text.lower() != "menu":
+            self.new_music_composer=text
+        return text.lower() != "menu"
+    def is_going_to_add_confirm(self, event):
+        text = event.message.text
+        return text.lower() != "確認"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -236,5 +263,52 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         laugh_content=laughing.laugh.pop(self.delete_num)
         send_text_message(reply_token,"你刪除了以下的笑話"+":\n"+laugh_content+"\n\n\n輸入menu返回主選單")
+    def on_enter_music_manage(self, event):
+        reply_token = event.reply_token
+        manage_list=(
+            "輸入「新增」增加音樂\n"+
+            "輸入「刪除」刪除音樂\n"+
+            "輸入「修改」修改音樂\n"+
+            "輸入 search 查詢音樂"
+        )
+        send_text_message(reply_token, manage_list)
+    def on_enter_add_music(self, event):
+        reply_token = event.reply_token
+        manage_list=(
+            "輸入你的歌曲曲名\n"+
+            "輸入menu返回主選單"
+        )
+        send_text_message(reply_token, manage_list)
+    def on_enter_add_music_name(self,event):
+        reply_token = event.reply_token
+        manage_list=(
+            "輸入你的歌曲連結\n"+
+            "輸入menu返回主選單"
+        )
+        send_text_message(reply_token, manage_list)
+    def on_enter_add_music_link(self,event):
+        reply_token = event.reply_token
+        manage_list=(
+            "輸入你的歌曲作曲家或在哪部電影戲劇\n"+
+            "輸入menu返回主選單"
+        )
+        send_text_message(reply_token, manage_list)
+    def on_enter_add_music_composer(self,event):
+        reply_token = event.reply_token
+        manage_list=(
+            "你要新增的曲目資訊如下："+
+            "曲名："+self.new_music_name+"\n"+
+            "連結："+self.new_music_link+"\n"+
+            "作曲家、演唱家或所屬電影戲劇："+self.new_music_composer+"\n"+
+            "輸入「確認」新增歌曲"
+            "輸入menu返回主選單"
+        )
+        send_text_message(reply_token, manage_list)
+    def on_enter_add_confirm(self, event):
+        music.music_name.append(self.new_music_name)
+        music.music_link.append(self.new_music_link)
+        music.composer.append(self.new_music_composer)
+        reply_token = event.reply_token
+        send_text_message(reply_token, "新增成功\n輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")

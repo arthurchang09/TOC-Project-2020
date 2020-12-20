@@ -250,7 +250,12 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num","delete_laugh","confirm_delete","finish_delete"],
+                states=["user","option","music","random","play", "guest_num",
+                        "right","wrong_large","wrong_small","riddle","riddle_right",
+                        "riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh",
+                        "add_success","search_laugh","laugh_search_num","delete_laugh",
+                        "confirm_delete","finish_delete","music_manage","add_music",
+                        "add_music_name","add_music_link","add_music_composer","add_confirm"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -425,6 +430,7 @@ def webhook_handler():
                         "conditions": "is_going_to_laugh",
                     },
                     #---------
+                    #笑話管理
                     {
                         "trigger": "advance",
                         "source": "option",
@@ -480,8 +486,51 @@ def webhook_handler():
                         "conditions": "is_going_to_finish_delete",
                     },
                     #---------
+                    {
+                        "trigger": "advance",
+                        "source": "option",
+                        "dest": "music_manage",
+                        "conditions": "is_going_to_music_manage",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "music_manage",
+                        "dest": "add_music",
+                        "conditions": "is_going_to_add_music",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "add_music",
+                        "dest": "add_music_name",
+                        "conditions": "is_going_to_add_music_name",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "add_music_name",
+                        "dest": "add_music_link",
+                        "conditions": "is_going_to_add_music_link",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "add_music_link",
+                        "dest": "add_music_composer",
+                        "conditions": "is_going_to_add_music_composer",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "add_music_composer",
+                        "dest": "add_confirm",
+                        "conditions": "is_going_to_add_confirm",
+                    },
+                    #---------
                     {"trigger": "advance", 
-                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num","delete_laugh","confirm_delete","finish_delete"], 
+                     "source": ["music","random","play", "guest_num","right","wrong_large",
+                                "wrong_small","riddle","riddle_right","riddle_wrong",
+                                "riddle_answer","laugh","laugh_manage","add_laugh",
+                                "add_success","search_laugh","laugh_search_num",
+                                "delete_laugh","confirm_delete","finish_delete",
+                                "music_manage","add_music","add_music_name","add_music_link",
+                                "add_music_composer","add_confirm"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
