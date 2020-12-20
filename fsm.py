@@ -245,7 +245,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token,"新增笑話\n"+text+"\n輸入menu返回主選單")
     def on_enter_list_laugh(self, event):
         reply_token = event.reply_token
-        laugh_list=()
+        laugh_list=[]
         for i in range(laughing.laugh):
             laugh_list.append(i)
         send_text_message(reply_token,"以下為所有笑話\n"+laugh_list+"\n輸入menu返回主選單")
