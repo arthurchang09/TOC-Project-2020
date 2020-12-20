@@ -79,9 +79,15 @@ class TocMachine(GraphMachine):
     def is_going_to_add_success(self,event):
         text = event.message.text
         return text.lower() != "menu"
-    def is_going_to_list_laugh(self,event):
+    def is_going_to_search_laugh(self,event):
         text = event.message.text
-        return text.lower() == "list"
+        return text.lower() == "search"
+    def is_going_to_laugh_search_num(self,event):
+        try:
+            int(text)
+            return True
+        except ValueError:
+            return False
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -228,7 +234,7 @@ class TocMachine(GraphMachine):
         manage_list=(
             "輸入「新增」增加笑話\n"+
             "輸入「刪除」刪除笑話\n"+
-            "輸入 list 列出所有笑話"
+            "輸入 search 查詢笑話"
         )
         send_text_message(reply_token, manage_list)
     def on_enter_add_laugh(self, event):
@@ -243,11 +249,14 @@ class TocMachine(GraphMachine):
         text = event.message.text
         laughing.laugh.append(text)
         send_text_message(reply_token,"新增笑話\n\n"+text+"\n\n輸入menu返回主選單")
-    def on_enter_list_laugh(self, event):
+    def on_enter_search_laugh(self, event):
         reply_token = event.reply_token
-        laugh_list=[]
-        for i in range(len(laughing.laugh)):
-            laugh_list.append(laughing.laugh[i])
-        send_text_message(reply_token,"以下為所有笑話\n"+laugh_list+"\n輸入menu返回主選單")
+        laugh_len=len(laughing.laugh)-1
+        send_text_message(reply_token,"輸入數字"+"0~"+laugh_len+"搜尋笑話")
+    def on_enter_search_laugh_num(self, event):
+        reply_token = event.reply_token
+        text = event.message.text
+        laugh_content=laughing.laugh[int(text)]
+        send_text_message(reply_token,"你的笑話是編號"+int(text)+":\n"+laugh_content+"\n\n\n輸入menu返回主選單\n輸入search再找一次")
     #def on_exit_state2(self):
      #   print("Leaving state2")

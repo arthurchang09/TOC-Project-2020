@@ -250,7 +250,7 @@ def webhook_handler():
     for event in events:
         if event.source.user_id not in machine:
             machine[event.source.user_id]=TocMachine(
-                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laugh"],
+                states=["user","option","music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -446,12 +446,24 @@ def webhook_handler():
                     {
                         "trigger": "advance",
                         "source": "laugh_manage",
-                        "dest": "list_laugh",
-                        "conditions": "is_going_to_list_laugh",
+                        "dest": "search_laugh",
+                        "conditions": "is_going_to_search_laugh",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "search_laugh",
+                        "dest": "laugh_search_num",
+                        "conditions": "is_going_to_laugh_search_num",
+                    },
+                    {
+                        "trigger": "advance",
+                        "source": "laugh_search_num",
+                        "dest": "search_laugh",
+                        "conditions": "is_going_to_search_laugh",
                     },
                     #---------
                     {"trigger": "advance", 
-                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","list_laugh"], 
+                     "source": ["music","random","play", "guest_num","right","wrong_large","wrong_small","riddle","riddle_right","riddle_wrong","riddle_answer","laugh","laugh_manage","add_laugh","add_success","search_laugh","laugh_search_num"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },
