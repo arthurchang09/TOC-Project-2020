@@ -2,7 +2,7 @@ from transitions.extensions import GraphMachine
 from linebot import LineBotApi, WebhookParser
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from utils import send_text_message,push_message
-from music import load_in_mem
+from music import load_in_file
 import random
 import laughing
 import music
@@ -225,7 +225,7 @@ class TocMachine(GraphMachine):
         push_message(event.source.user_id,"曲目如下：")
         for i in range(0,len(music.music_name)):
             #music_list.append(str(i+1)+music.music_name[i]+"\n")
-            music_list+=str(i+1)+"."+music.music_name[i]+"\n"
+            music_list+=str(i+1)+"."+music.music_name[i]+""
         push_message(event.source.user_id,music_list)
         reply_token = event.reply_token
         send_text_message(reply_token,"選歌請輸入歌曲編號\n"+"隨機播放 請輸入「隨機」\n"+"輸入menu回到主選單")
@@ -374,6 +374,7 @@ class TocMachine(GraphMachine):
         music.music_name.append(self.new_music_name)
         music.music_link.append(self.new_music_link)
         music.composer_name.append(self.new_music_composer)
+        load_in_file()
         reply_token = event.reply_token
         send_text_message(reply_token, "新增成功\n輸入menu返回主選單")
     def on_enter_delete_music(self,event):
@@ -396,6 +397,7 @@ class TocMachine(GraphMachine):
             music.music_link.pop(self.music_delete_num)+"\n"+
             music.composer_name.pop(self.music_delete_num)+"\n"
         )
+        load_in_file()
         send_text_message(reply_token,"你刪除了以下的笑話"+":\n"+music_content+"\n\n\n輸入menu返回主選單")
     def on_enter_modify_music(self, event):
         reply_token = event.reply_token
@@ -427,6 +429,7 @@ class TocMachine(GraphMachine):
         music.music_name[self.modify_num]=self.new_music_name
         music.music_link[self.modify_num]=self.new_music_link
         music.composer_name[self.modify_num]=self.new_music_composer
+        load_in_file()
         send_text_message(reply_token,"成功修改，輸入menu返回主選單")
     #def on_exit_state2(self):
      #   print("Leaving state2")
