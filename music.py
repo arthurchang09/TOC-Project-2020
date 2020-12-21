@@ -41,5 +41,5 @@ def load_in_mem():
     music_link=f2.readlines()
     f2.close()
     f3=open("music_composer.txt","r")
-    composer_name=f2.readlines()
+    composer_name=f3.readlines()
     f3.close()
