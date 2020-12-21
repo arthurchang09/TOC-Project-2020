@@ -19,17 +19,6 @@ class TocMachine(GraphMachine):
         self.new_music_link=""
         self.music_delete_num=""
         self.modify_num=0
-        """
-        f1=open("music_name.txt","r")
-        music.music_name=f1.readlines()
-        f1.close()
-        f2=open("music_link.txt","r")
-        music.music_link=f2.readlines()
-        f2.close()
-        f3=open("music_composer.txt","r")
-        music.composer_name=f3.readlines()
-        f3.close()
-        """
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -174,7 +163,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         try:
             int(text)
-            if int(text)<len(music.music_name):
+            if int(text)<=len(music.music_name):
                 self.modify_num=int(text)-1
                 self.new_music_name=music.music_name[self.modify_num]
                 self.new_music_link=music.music_link[self.modify_num]
