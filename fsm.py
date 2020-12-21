@@ -157,7 +157,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         try:
             int(text)
-            if int(text)<len(music.music_name):
+            if int(text)<=len(music.music_name):
                 self.music_delete_num=int(text)-1
                 return True
             else:
@@ -237,6 +237,7 @@ class TocMachine(GraphMachine):
         for i in range(0,len(music.music_name)):
             #music_list.append(str(i+1)+music.music_name[i]+"\n")
             music_list+=str(i+1)+"."+music.music_name[i]+""
+        music_list[len(music.music_name)-1]+="\n"
         push_message(event.source.user_id,music_list)
         reply_token = event.reply_token
         send_text_message(reply_token,"選歌請輸入歌曲編號\n"+"隨機播放 請輸入「隨機」\n"+"輸入menu回到主選單")
@@ -382,7 +383,7 @@ class TocMachine(GraphMachine):
         )
         send_text_message(reply_token, manage_list)
     def on_enter_add_confirm(self, event):
-        music.music_name.append(self.new_music_name+"\n")
+        music.music_name.append(self.new_music_name)
         music.music_link.append(self.new_music_link)
         music.composer_name.append(self.new_music_composer)
         load_in_file()
@@ -438,7 +439,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token,"請輸入要修改的作曲家")
     def on_enter_modify_confirm(self,event):
         reply_token = event.reply_token
-        music.music_name[self.modify_num]=self.new_music_name+"\n"
+        music.music_name[self.modify_num]=self.new_music_name
         music.music_link[self.modify_num]=self.new_music_link
         music.composer_name[self.modify_num]=self.new_music_composer
         load_in_file()
