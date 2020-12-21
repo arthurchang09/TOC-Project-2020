@@ -374,7 +374,15 @@ class TocMachine(GraphMachine):
         music.music_name.append(self.new_music_name)
         music.music_link.append(self.new_music_link)
         music.composer_name.append(self.new_music_composer)
-        load_in_file()
+        f1=open("music_name.txt","w")
+        f1.writelines(music.music_name)
+        f1.close()
+        f2=open("music_link.txt","w")
+        f2.writelines(music.music_link)
+        f2.close()
+        f3=open("music_composer.txt","w")
+        f3.writelines(music.composer_name)
+        f3.close()
         reply_token = event.reply_token
         send_text_message(reply_token, "新增成功\n輸入menu返回主選單")
     def on_enter_delete_music(self,event):
