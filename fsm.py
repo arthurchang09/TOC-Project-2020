@@ -19,6 +19,7 @@ class TocMachine(GraphMachine):
         self.new_music_link=""
         self.music_delete_num=""
         self.modify_num=0
+        """
         f1=open("music_name.txt","r")
         music.music_name=f1.readlines()
         f1.close()
@@ -28,6 +29,7 @@ class TocMachine(GraphMachine):
         f3=open("music_composer.txt","r")
         music.composer_name=f3.readlines()
         f3.close()
+        """
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -380,7 +382,7 @@ class TocMachine(GraphMachine):
         )
         send_text_message(reply_token, manage_list)
     def on_enter_add_confirm(self, event):
-        music.music_name.append(self.new_music_name)
+        music.music_name.append(self.new_music_name+"\n")
         music.music_link.append(self.new_music_link)
         music.composer_name.append(self.new_music_composer)
         load_in_file()
@@ -436,7 +438,7 @@ class TocMachine(GraphMachine):
         send_text_message(reply_token,"請輸入要修改的作曲家")
     def on_enter_modify_confirm(self,event):
         reply_token = event.reply_token
-        music.music_name[self.modify_num]=self.new_music_name
+        music.music_name[self.modify_num]=self.new_music_name+"\n"
         music.music_link[self.modify_num]=self.new_music_link
         music.composer_name[self.modify_num]=self.new_music_composer
         load_in_file()
