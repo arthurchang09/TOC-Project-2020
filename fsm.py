@@ -19,6 +19,15 @@ class TocMachine(GraphMachine):
         self.new_music_link=""
         self.music_delete_num=""
         self.modify_num=0
+        f1=open("music_name.txt","r")
+        music.music_name=f1.readlines()
+        f1.close()
+        f2=open("music_link.txt","r")
+        music.music_link=f2.readlines()
+        f2.close()
+        f3=open("music_composer.txt","r")
+        music.composer_name=f3.readlines()
+        f3.close()
         self.machine = GraphMachine(model=self, **machine_configs)
 
     def is_going_to_music(self, event):
@@ -212,7 +221,7 @@ class TocMachine(GraphMachine):
             "2.guess number：猜數字遊戲\n"+
             "3.猜謎：來猜點謎語吧\n"+
             "4.笑話：看笑話放鬆一下(很冷警告)\n"+
-            "5.笑話管理：新增、搜尋或刪除笑話"+
+            "5.笑話管理：新增、搜尋或刪除笑話\n"+
             "6.音樂管理：新增、刪除、修改音樂"
             )
         reply_token = event.reply_token
@@ -389,6 +398,7 @@ class TocMachine(GraphMachine):
             "連結："+music.music_link[self.music_delete_num]+"\n"+
             "作曲家、演唱家或所屬電影戲劇："+music.composer_name[self.music_delete_num]+"\n"
         )
+        load_in_file()
         send_text_message(reply_token,"你要刪除的音樂"+":\n"+music_content+"輸入「確認刪除」刪除音樂\n輸入menu返回主選單")
     def on_enter_finish_delete_music(self, event):
         reply_token = event.reply_token
