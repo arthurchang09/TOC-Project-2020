@@ -33,7 +33,7 @@ music_link=[
 music_name=[]
 music_link=[]
 composer_name=[]
-def load_in_mem():
+def load_in_mem(music_name,music_link,composer_name):
     f1=open("music_name.txt","r")
     music_name=f1.readlines()
     f1.close()

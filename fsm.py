@@ -220,7 +220,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_music(self, event):
         print("I'm entering music")
-        load_in_mem()
+        load_in_mem(music.music_name,music.music_link,music.composer_name)
         music_list=""
         push_message(event.source.user_id,"曲目如下：")
         for i in range(0,len(music.music_name)):
