@@ -36,6 +36,7 @@ composer_name=[]
 
 f1=open("music_name.txt","r")
 music_name=f1.readlines()
+music_name[len(music_name)-1]+="\n"
 f1.close()
 f2=open("music_link.txt","r")
 music_link=f2.readlines()
