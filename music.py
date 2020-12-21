@@ -1,3 +1,4 @@
+"""
 music_name=[
     "op48 no 1 by Chopin",
     "Symphony no.6 by Tchaikovsky",
@@ -28,3 +29,17 @@ music_link=[
     "https://www.youtube.com/watch?v=e3yrEEM5j_s",
     "https://www.youtube.com/watch?v=UWNCbpwC-PQ",
 ]
+"""
+music_name=[]
+music_link=[]
+composer_name=[]
+def load_in_mem():
+    f1=open("music_name.txt","r")
+    music_name=f1.readlines()
+    f1.close()
+    f2=open("music_link.txt","r")
+    music_link=f2.readlines()
+    f2.close()
+    f3=open("music_composer.txt","r")
+    composer_name=f2.readlines()
+    f3.close()

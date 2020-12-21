@@ -2,7 +2,7 @@ from transitions.extensions import GraphMachine
 from linebot import LineBotApi, WebhookParser
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from utils import send_text_message,push_message
-
+from music import load_in_mem
 import random
 import laughing
 import music
@@ -220,6 +220,7 @@ class TocMachine(GraphMachine):
 
     def on_enter_music(self, event):
         print("I'm entering music")
+        load_in_mem()
         music_list=""
         push_message(event.source.user_id,"曲目如下：")
         for i in range(0,len(music.music_name)):
