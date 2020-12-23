@@ -1,7 +1,7 @@
 from transitions.extensions import GraphMachine
 from linebot import LineBotApi, WebhookParser
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-from utils import send_text_message,push_message
+from utils import send_text_message,push_message,send_image_url
 from music import load_in_file
 import random
 import laughing
@@ -221,18 +221,6 @@ class TocMachine(GraphMachine):
     def on_enter_music(self, event):
         print("I'm entering music")
         #load_in_mem()
-        
-        f1=open("music_name.txt","r")
-        music.music_name=f1.readlines()
-        music.music_name[len(music.music_name)-1]+="\n"
-        f1.close()
-        f2=open("music_link.txt","r")
-        music.music_link=f2.readlines()
-        f2.close()
-        f3=open("music_composer.txt","r")
-        music.composer_name=f3.readlines()
-        f3.close()
-        
         music_list=""
         push_message(event.source.user_id,"曲目如下：")
         for i in range(0,len(music.music_name)):
@@ -292,6 +280,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
         push_message(event.source.user_id, "笑你")
+        send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19734.jpg")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答案是 「"+self.ans+"」，想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
