@@ -23,7 +23,7 @@ def push_message(user_id,msg):
 def send_image_url(id, img_url):
     line_bot_api = LineBotApi(channel_access_token)
     message=ImageSendMessage(
-        original_content_url=img_url
+        original_content_url=img_url,
         preview_image_url=img_url
         )
     line_bot_api.push_message(id,message)
