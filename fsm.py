@@ -276,11 +276,20 @@ class TocMachine(GraphMachine):
     def on_enter_riddle_right(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答對了 \n輸入Menu回到主選單 \n輸入「猜謎」再猜一次")
+        send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
     def on_enter_riddle_wrong(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
         push_message(event.source.user_id, "笑你")
-        send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19734.jpg")
+        chose_img=random.randint(0,3)
+        if chose_img==0:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19738.jpg")
+        elif chose_img==1:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
+        elif chose_img==2:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
+        elif chose_img==3:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/sleepy_polar_bear.jpg")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
         send_text_message(reply_token, "答案是 「"+self.ans+"」，想不到吧！！！！\n輸入Menu回到主選單 \n輸入「猜謎」再猜另一題")
