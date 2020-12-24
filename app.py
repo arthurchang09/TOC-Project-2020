@@ -257,7 +257,7 @@ def webhook_handler():
                         "confirm_delete","finish_delete","music_manage","add_music",
                         "add_music_name","add_music_link","add_music_composer","add_confirm",
                         "delete_music","confirm_delete_music","finish_delete_music","modify_music",
-                        "modify_list","modify_name","modify_link","modify_composer","modify_confirm"],
+                        "modify_list","modify_name","modify_link","modify_composer","modify_confirm","show_graph"],
                 transitions=[
                     {
                         "trigger": "advance",
@@ -600,6 +600,13 @@ def webhook_handler():
                         "conditions": "is_going_to_modify_confirm",
                     },
                     #---------
+                    {
+                        "trigger": "advance",
+                        "source": "option",
+                        "dest": "show_graph",
+                        "conditions": "is_going_to_show_graph",
+                    },
+                    #---------
                     {"trigger": "advance", 
                      "source": ["music","random","play", "guest_num","right","wrong_large",
                                 "wrong_small","riddle","riddle_right","riddle_wrong",
@@ -609,7 +616,7 @@ def webhook_handler():
                                 "music_manage","add_music","add_music_name","add_music_link",
                                 "add_music_composer","add_confirm","delete_music","confirm_delete_music",
                                 "finish_delete_music","modify_music","modify_list","modify_name",
-                                "modify_link","modify_composer","modify_confirm"], 
+                                "modify_link","modify_composer","modify_confirm","show_graph"], 
                      "dest": "option",
                      "conditions":"is_going_back"
                     },

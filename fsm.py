@@ -200,6 +200,9 @@ class TocMachine(GraphMachine):
     def is_going_to_modify_confirm(self,event):
         text = event.message.text
         return text.lower() == "確認"
+    def is_going_to_show_graph(self,event):
+        text = event.message.text
+        return text.lower() == "fsm"
     def is_going_back(self, event):
         text = event.message.text
         return text.lower() == "menu"
@@ -462,5 +465,8 @@ class TocMachine(GraphMachine):
         music.composer_name[self.modify_num]=self.new_music_composer
         load_in_file()
         send_text_message(reply_token,"成功修改，輸入menu返回主選單")
+    def on_enter_show_graph(self,event):
+        send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/seal.jpg")
+        
     #def on_exit_state2(self):
      #   print("Leaving state2")
