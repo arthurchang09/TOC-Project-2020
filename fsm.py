@@ -281,14 +281,24 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "答錯了 \n以卑微的語氣輸入 「拜託給我答案」取得答案\n你也可以繼續猜下去，祝你好運\n輸入Menu回到主選單 ")
         push_message(event.source.user_id, "笑你")
-        chose_img=random.randint(0,3)
+        chose_img=random.randint(0,7)
         if chose_img==0:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19738.jpg")
+            push_message(event.source.user_id, "熊熊都看不下去了")
         elif chose_img==1:
-            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19734.jpg")
         elif chose_img==2:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
         elif chose_img==3:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/sleepy_polar_bear.jpg")
+        elif chose_img==4:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/rabbit.jpg")
+        elif chose_img==5:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/squarljpg.jpg")
+            push_message(event.source.user_id, "松鼠都看不下去了")
+        elif chose_img==6:
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/seal.jpg")
+        else:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/sleepy_polar_bear.jpg")
     def on_enter_riddle_answer(self, event):
         reply_token = event.reply_token
