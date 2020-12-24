@@ -288,7 +288,7 @@ class TocMachine(GraphMachine):
         elif chose_img==1:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19734.jpg")
         elif chose_img==2:
-            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/19737.jpg")
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/seal.jpg")
         elif chose_img==3:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/sleepy_polar_bear.jpg")
         elif chose_img==4:
@@ -297,7 +297,7 @@ class TocMachine(GraphMachine):
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/squarljpg.jpg")
             push_message(event.source.user_id, "松鼠都看不下去了")
         elif chose_img==6:
-            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/seal.jpg")
+            send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/polar_bear2.jpg")
         else:
             send_image_url(event.source.user_id,"https://raw.githubusercontent.com/arthurchang09/img/main/sleepy_polar_bear.jpg")
     def on_enter_riddle_answer(self, event):
